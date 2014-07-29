@@ -14,26 +14,26 @@ namespace Retail.Web.Models {
         [Required, Display(Name = "Date")]
         public DateTime Date { get; set; }
 
-        [Required, Display(Name = "SubTotal"), Column(TypeName = "Money")]
+        [Required, Display(Name = "SubTotal"), Column(TypeName = "Money"), UIHint("Money")]
         public decimal SubTotal { get; set; }
 
-        [Required, Display(Name = "Discount"), Column(TypeName = "Money")]
+        [Required, Display(Name = "Discount"), Column(TypeName = "Money"), UIHint("Money")]
         public decimal Discount { get; set; }
 
-        [Required, Display(Name = "Tax"), Column(TypeName = "Money")]
+        [Required, Display(Name = "Tax"), Column(TypeName = "Money"), UIHint("Money")]
         public decimal Tax { get; set; }
 
-        [Required, Display(Name = "Total"), Column(TypeName = "Money")]
+        [Required, Display(Name = "Total"), Column(TypeName = "Money"), UIHint("Money")]
         public decimal Total { get; set; }
 
         [Required, Display(Name = "Customer"), InverseProperty("Sales")]
-        public Customer Customer { get; set; }
+        public virtual Customer Customer { get; set; }
 
         [Required, Display(Name = "Employee"), InverseProperty("Sales")]
-        public Employee Employee { get; set; }
+        public virtual Employee Employee { get; set; }
 
         [InverseProperty("Sale")]
-        public List<SaleItem> SaleItems { get; set; }
+        public virtual List<SaleItem> SaleItems { get; set; }
 
     }
 }

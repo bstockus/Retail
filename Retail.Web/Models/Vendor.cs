@@ -15,7 +15,7 @@ namespace Retail.Web.Models {
         public string Name { get; set; }
 
         [InverseProperty("Vendor")]
-        public List<Product> Products { get; set; }
+        public virtual List<Product> Products { get; set; }
 
     }
 }

@@ -15,10 +15,10 @@ namespace Retail.Web.Models {
         public DateTime Date { get; set; }
 
         [Required, Display(Name = "Customer"), InverseProperty("Incidents")]
-        public Customer Customer { get; set; }
+        public virtual Customer Customer { get; set; }
 
         [Required, Display(Name = "Employee"), InverseProperty("Incidents")]
-        public Employee Employee { get; set; }
+        public virtual Employee Employee { get; set; }
 
         [Required, Display(Name = "Open")]
         public bool IsOpen { get; set; }

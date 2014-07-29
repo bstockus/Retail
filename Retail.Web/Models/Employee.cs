@@ -39,13 +39,13 @@ namespace Retail.Web.Models {
         public string Job { get; set; }
 
         [InverseProperty("Employee")]
-        public List<Incident> Incidents { get; set; }
+        public virtual List<Incident> Incidents { get; set; }
 
         [InverseProperty("Employee")]
-        public List<Service> Services { get; set; }
+        public virtual List<Service> Services { get; set; }
 
         [InverseProperty("Employee")]
-        public List<Sale> Sales { get; set; }
+        public virtual List<Sale> Sales { get; set; }
 
     }
 }

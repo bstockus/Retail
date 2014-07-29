@@ -13,7 +13,7 @@ namespace Retail.Web.Models {
         }
 
         public RetailDbContext()
-            : this(@"Data Source=BSTOCKUS-PC\SQLEXPRESS;Initial Catalog=RetailDB;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False") {
+            : this(@"Data Source=BSTOCKUS-PC\SQLEXPRESS;Initial Catalog=RetailDB;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False;MultipleActiveResultSets=true") {
 
         }
 

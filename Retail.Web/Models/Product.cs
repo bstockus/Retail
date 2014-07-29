@@ -15,21 +15,21 @@ namespace Retail.Web.Models {
         public string Name { get; set; }
 
         [Required, Index, Display(Name = "Category"), InverseProperty("Products")]
-        public Category Category { get; set; }
+        public virtual Category Category { get; set; }
 
         [Required, Index, Display(Name = "Vendor"), InverseProperty("Products")]
-        public Vendor Vendor { get; set; }
+        public virtual Vendor Vendor { get; set; }
 
         [InverseProperty("Product")]
-        public List<SaleItem> SaleItems { get; set; }
+        public virtual List<SaleItem> SaleItems { get; set; }
 
         [InverseProperty("Product")]
-        public List<Service> Services { get; set; }
+        public virtual List<Service> Services { get; set; }
 
         [StringLength(1000), Display(Name = "Description"), DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
-        [Required, Display(Name = "Price"), Column(TypeName = "Money")]
+        [Required, Display(Name = "Price"), Column(TypeName = "Money"), UIHint("Money")]
         public decimal Price { get; set; }
 
     }
