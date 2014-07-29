@@ -26,10 +26,10 @@ namespace Retail.Web.Models {
         [Required, Display(Name = "Total"), Column(TypeName = "Money"), UIHint("Money")]
         public decimal Total { get; set; }
 
-        [Required, Display(Name = "Customer"), InverseProperty("Sales")]
+        [Required, Display(Name = "Customer"), InverseProperty("Sales"), UIHint("Customer")]
         public virtual Customer Customer { get; set; }
 
-        [Required, Display(Name = "Employee"), InverseProperty("Sales")]
+        [Required, Display(Name = "Employee"), InverseProperty("Sales"), UIHint("Employee")]
         public virtual Employee Employee { get; set; }
 
         [InverseProperty("Sale")]

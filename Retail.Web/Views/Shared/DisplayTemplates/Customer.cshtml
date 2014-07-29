@@ -1,0 +1,5 @@
+﻿@model Retail.Web.Models.Customer
+
+<a href="@Url.Action("Details", "Customers", new { id = Model.Id })">
+    @Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)
+</a>

@@ -11,6 +11,10 @@
 } else {
     
     <style type="text/css">
+        #commands-column {
+            width: 20px;
+        }
+
         #unit-price-column {
             width: 100px;
         }
@@ -27,46 +31,44 @@
     
     <table class="table">
         <tr>
+            @if (ViewBag.IsEditable) {
+                <th id="commands-column"></th>
+            }
             <th>
-                @Html.DisplayNameFor(model => model.Product.Name)
+                @Html.DisplayNameFor(model => model.Product)
             </th>
-            <th id="unit-price-column">
+            <th class="text-right" id="unit-price-column">
                 @Html.DisplayNameFor(model => model.UnitPrice)
             </th>
-            <th id="quantity-column">
+            <th class="text-right" id="quantity-column">
                 @Html.DisplayNameFor(model => model.Quantity)
             </th>
             <th class="text-right" id="item-price-column">
                 @Html.DisplayNameFor(model => model.ItemPrice)
             </th>
-            @if (ViewBag.IsEditable) {
-                <th></th>
-            }
         </tr>
 
 
 
         @foreach (var item in Model) {
             <tr>
+                @if (ViewBag.IsEditable) {
+                    <td>
+                        <a href="@Url.Action("Delete", new { id = item.Id })"><i class="fa fa-minus-circle"></i></a>
+                    </td>
+                }
                 <td>
-                    @Html.DisplayFor(modelItem => item.Product.Name)
+                    @Html.DisplayFor(modelItem => item.Product)
                 </td>
-                <td>
+                <td class="text-right">
                     @Html.DisplayFor(modelItem => item.UnitPrice)
                 </td>
-                <td>
+                <td class="text-right">
                     @Html.DisplayFor(modelItem => item.Quantity)
                 </td>
                 <td class="text-right">
                     @Html.DisplayFor(modelItem => item.ItemPrice)
                 </td>
-                @if (ViewBag.IsEditable) {
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                    </td>
-                }
             </tr>
         }
 

@@ -123,6 +123,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Code\PageHeaders.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -670,9 +671,14 @@
     <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\SaleItems\_Table.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Money.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Employee.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Customer.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Product.cshtml" />
+    <Content Include="Views\Shared\_DetailsPageHeader.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Shared\EditorTemplates\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

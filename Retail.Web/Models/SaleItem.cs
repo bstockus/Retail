@@ -14,7 +14,7 @@ namespace Retail.Web.Models {
         [Required, Display(Name = "Sale"), InverseProperty("SaleItems")]
         public virtual Sale Sale { get; set; }
 
-        [Required, Display(Name = "Product"), InverseProperty("SaleItems")]
+        [Required, Display(Name = "Product"), InverseProperty("SaleItems"), UIHint("Product")]
         public virtual Product Product { get; set; }
 
         [Required, Display(Name = "Unit Price"), Column(TypeName = "Money"), UIHint("Money")]
