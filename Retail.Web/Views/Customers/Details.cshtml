@@ -1,0 +1,86 @@
+﻿@model Retail.Web.Models.Customer
+
+@{
+    ViewBag.Title = "Customer " + Model.Id.ToString();
+}
+
+<div class="page-header">
+    <p class="pull-right">
+        <a role="button" class="btn btn-success" href="@Url.Action("Edit", new { id = Model.Id })"><i class='fa fa-pencil fa-fw'></i> Edit</a>
+        <a role="button" class="btn btn-danger" href="@Url.Action("Delete", new { id=Model.Id })"><i class='fa fa-trash-o fa-fw'></i> Delete</a>
+    </p>
+    <h2>
+        <a role="button" class="btn btn-default" href="@Url.Action("Index")"><i class='fa fa-chevron-left fa-fw'></i> Customers</a>
+        @Model.LastName, @Model.FirstName
+        <small>DETAILS</small>
+    </h2>
+</div>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AddressStreet)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AddressStreet)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AddressCity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AddressCity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AddressZip)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AddressZip)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AddressState)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AddressState)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+    </dl>
+</div>

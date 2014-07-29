@@ -1,0 +1,90 @@
+﻿@model Retail.Web.Models.Employee
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Employee</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AddressStreet)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AddressStreet)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AddressCity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AddressCity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AddressZip)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AddressZip)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AddressState)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AddressState)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Job)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Job)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
