@@ -1,90 +1,132 @@
 ﻿@model Retail.Web.Models.Employee
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Employee " + Model.Id.ToString();
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>Employee</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PhoneNumber)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AddressStreet)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AddressStreet)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AddressCity)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AddressCity)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AddressZip)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AddressZip)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AddressState)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AddressState)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Job)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Job)
-        </dd>
-
-    </dl>
+<div class="">
+    <p class="pull-right">
+        <a role="button" class="btn btn-success" href="@Url.Action("Edit", new { id = Model.Id })"><i class='fa fa-pencil fa-fw'></i> Edit</a>
+        <a role="button" class="btn btn-danger" href="@Url.Action("Delete", new { id=Model.Id })"><i class='fa fa-trash-o fa-fw'></i> Delete</a>
+    </p>
+    <h2>
+        <a role="button" class="btn btn-default" href="@Url.Action("Index")"><i class='fa fa-chevron-left fa-fw'></i> Employees</a>
+        @Model.LastName, @Model.FirstName
+        <small>DETAILS</small>
+    </h2>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<ul class="nav nav-tabs" role="tablist">
+    <li class="active"><a href="#details" role="tab" data-toggle="tab">Details</a></li>
+    <li><a href="#sales" role="tab" data-toggle="tab">Sales</a></li>
+    <li><a href="#services" role="tab" data-toggle="tab">Services</a></li>
+    <li><a href="#incidents" role="tab" data-toggle="tab">Incidents</a></li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane active" id="details">
+        <div>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.FirstName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.LastName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.LastName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.PhoneNumber)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.AddressStreet)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.AddressStreet)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.AddressCity)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.AddressCity)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.AddressZip)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.AddressZip)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.AddressState)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.AddressState)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Email)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Job)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Job)
+                </dd>
+
+            </dl>
+        </div>
+    </div>
+    <div class="tab-pane" id="sales">
+        <div class="details-tab-div">
+            @{
+                var vdSales = new ViewDataDictionary();
+                vdSales.Add("IsEditable", false);
+                Html.RenderPartial("~/Views/Sales/_Table.cshtml", Model.Sales, vdSales);
+            }
+        </div>
+    </div>
+    <div class="tab-pane" id="services">
+        <div class="details-tab-div">
+            @{
+                var vdServices = new ViewDataDictionary();
+                vdServices.Add("IsEditable", false);
+                Html.RenderPartial("~/Views/Services/_Table.cshtml", Model.Services, vdServices);
+            }
+        </div>
+    </div>
+    <div class="tab-pane" id="incidents">
+        <div class="details-tab-div">
+            @{
+                var vdIncidents = new ViewDataDictionary();
+                vdIncidents.Add("IsEditable", false);
+                Html.RenderPartial("~/Views/Incidents/_Table.cshtml", Model.Incidents, vdIncidents);
+            }
+        </div>
+    </div>
+</div>

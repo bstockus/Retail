@@ -7,8 +7,10 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Retail.Web.Models;
+using Retail.Web.Infrastructure;
 
 namespace Retail.Web.Controllers {
+    [NavBarNameAction("Sales")]
     public class SalesController : Controller {
         private RetailDbContext db = new RetailDbContext();
 

@@ -123,7 +123,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Code\PageHeaders.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -142,6 +141,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\CompanyNameActionAttribute.cs" />
+    <Compile Include="Infrastructure\NavBarNameActionAttribute.cs" />
     <Compile Include="Migrations\201407290120030_InitialCreate.cs" />
     <Compile Include="Migrations\201407290120030_InitialCreate.Designer.cs">
       <DependentUpon>201407290120030_InitialCreate.cs</DependentUpon>
@@ -170,6 +170,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-checkbox.css" />
+    <Content Include="Content\bootstrap-select.css" />
+    <Content Include="Content\bootstrap-select.min.css" />
+    <Content Include="Content\bootstrap-switch.css" />
+    <Content Include="Content\bootstrap-switch.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.css" />
@@ -180,6 +185,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\bootstrap-checkbox.js" />
+    <Content Include="Scripts\bootstrap-select.js" />
+    <Content Include="Scripts\bootstrap-select.min.js" />
+    <Content Include="Scripts\bootstrap-switch.js" />
+    <Content Include="Scripts\bootstrap-switch.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config" />
@@ -674,10 +684,17 @@
     <Content Include="Views\Shared\DisplayTemplates\Employee.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Customer.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Product.cshtml" />
-    <Content Include="Views\Shared\_DetailsPageHeader.cshtml" />
+    <Content Include="Views\Customers\_Table.cshtml" />
+    <Content Include="Views\Sales\_Table.cshtml" />
+    <Content Include="Views\Services\_Table.cshtml" />
+    <Content Include="Views\Incidents\_Table.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Sale.cshtml" />
+    <Content Include="Views\Employees\_Table.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Code\" />
     <Folder Include="App_Data\" />
+    <Folder Include="Migrations\FakeData\" />
     <Folder Include="Views\Shared\EditorTemplates\" />
   </ItemGroup>
   <ItemGroup>

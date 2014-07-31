@@ -1,4 +1,4 @@
-﻿using Retail.Infrastructure;
+﻿using Retail.Web.Infrastructure;
 using System.Web;
 using System.Web.Mvc;
 

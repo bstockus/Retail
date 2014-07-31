@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@{
+    if (ViewBag.NavBarName == null) {
+        ViewBag.NavBarName = "";
+    }
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -6,15 +12,16 @@
     <title>@ViewBag.Title - @ViewBag.CompanyName</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-<script type="text/javascript">
-    window.appInsights={queue:[],applicationInsightsId:null,accountId:null,appUserId:null,configUrl:null,start:function(n){function u(n,t){n[t]=function(){var i=arguments;n.queue.push(function(){n[t].apply(n,i)})}}function f(n){var t=document.createElement("script");return t.type="text/javascript",t.src=n,t.async=!0,t}function r(){i.appendChild(f("//az416426.vo.msecnd.net/scripts/ai.0.js"))}var i,t;this.applicationInsightsId=n;u(this,"logEvent");u(this,"logPageView");i=document.getElementsByTagName("script")[0].parentNode;this.configUrl===null?r():(t=f(this.configUrl),t.onload=r,t.onerror=r,i.appendChild(t));this.start=function(){}}};
+    <script type="text/javascript">
+        window.appInsights = { queue: [], applicationInsightsId: null, accountId: null, appUserId: null, configUrl: null, start: function (n) { function u(n, t) { n[t] = function () { var i = arguments; n.queue.push(function () { n[t].apply(n, i) }) } } function f(n) { var t = document.createElement("script"); return t.type = "text/javascript", t.src = n, t.async = !0, t } function r() { i.appendChild(f("//az416426.vo.msecnd.net/scripts/ai.0.js")) } var i, t; this.applicationInsightsId = n; u(this, "logEvent"); u(this, "logPageView"); i = document.getElementsByTagName("script")[0].parentNode; this.configUrl === null ? r() : (t = f(this.configUrl), t.onload = r, t.onerror = r, i.appendChild(t)); this.start = function () { } } };
 
-    appInsights.configUrl="/ApplicationInsights.axd";
-appInsights.start();
-    appInsights.logPageView();
-</script></head>
+        appInsights.configUrl = "/ApplicationInsights.axd";
+        appInsights.start();
+        appInsights.logPageView();
+    </script>
+</head>
 <body>
-    
+
     <div id="wrap">
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
@@ -28,13 +35,24 @@ appInsights.start();
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("Customers", "Index", "Customers")</li>
-                        <li>@Html.ActionLink("Employees", "Index", "Employees")</li>
-                        <li>@Html.ActionLink("Products", "Index", "Products")</li>
-                        <li>@Html.ActionLink("Sales", "Index", "Sales")</li>
-                        <li>@Html.ActionLink("Services", "Index", "Services")</li>
-                        <li>@Html.ActionLink("Incidents", "Index", "Incidents")</li>
+
+                        @{
+                            string[] items = new string[] { "Home", "Customers", "Employees", "Products", "Sales", "Services", "Incidents" };
+                        }
+
+                        @foreach (string item in items) {
+                            if (item == ViewBag.NavBarName) {
+                                <li class="active">
+                                    @Html.ActionLink(item, "Index", item)
+                                </li>
+                            } else {
+                                <li>
+                                    @Html.ActionLink(item, "Index", item)
+                                </li>
+                            }
+
+                        }
+                        
                     </ul>
                 </div>
             </div>
@@ -53,5 +71,16 @@ appInsights.start();
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+    <script type="text/javascript">
+        $(function () {
+            $("select").attr("data-width", "280px");
+            $("select").selectpicker();
+
+            $('input[type="checkbox"]').bootstrapSwitch();
+
+        });
+    </script>
+
 </body>
 </html>

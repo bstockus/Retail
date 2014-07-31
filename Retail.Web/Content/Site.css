@@ -49,3 +49,15 @@ body {
         padding-right: 20px;
     }
 }
+
+th {
+    border-top: 0 solid white !important;
+}
+
+.details-tab-div {
+    margin-top: 10px;
+}
+
+table {
+    border-top: 0 solid white;
+}

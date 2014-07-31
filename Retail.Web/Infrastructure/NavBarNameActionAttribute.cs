@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
-using Retail.Web.Models;
 
 namespace Retail.Web.Infrastructure {
-    public class CompanyNameActionAttribute : FilterAttribute, IActionFilter {
+    public class NavBarNameActionAttribute : FilterAttribute, IActionFilter {
+
+        public string Name { get; set; }
+
+        public NavBarNameActionAttribute(string name) {
+            this.Name = name;
+        }
 
         public void OnActionExecuted(ActionExecutedContext filterContext) {
-            using (var context = new RetailDbContext()) {
-                Company company = context.Companies.First();
-                filterContext.Controller.ViewBag.CompanyName = company.Name;
-            }
+            filterContext.Controller.ViewBag.NavBarName = this.Name;
         }
 
         public void OnActionExecuting(ActionExecutingContext filterContext) {

@@ -1,0 +1,5 @@
+﻿@model Retail.Web.Models.Sale
+
+<a href="@Url.Action("Details", "Sales", new { id = Model.Id })">
+    @Html.DisplayFor(model => model.Date)
+</a>
