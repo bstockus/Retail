@@ -690,6 +690,7 @@
     <Content Include="Views\Incidents\_Table.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Sale.cshtml" />
     <Content Include="Views\Employees\_Table.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Category.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />

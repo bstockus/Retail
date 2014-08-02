@@ -1,0 +1,5 @@
+﻿@model Retail.Web.Models.Category
+
+<a href="@Url.Action("Details", "Categories", new { id = Model.Id })">
+    @Html.DisplayFor(model => model.Name)
+</a>

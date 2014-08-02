@@ -14,7 +14,7 @@ namespace Retail.Web.Models {
         [Required, StringLength(100), Index, Display(Name = "Name")]
         public string Name { get; set; }
 
-        [Required, Index, Display(Name = "Category"), InverseProperty("Products")]
+        [Required, Index, Display(Name = "Category"), InverseProperty("Products"), UIHint("Category")]
         public virtual Category Category { get; set; }
 
         [Required, Index, Display(Name = "Vendor"), InverseProperty("Products")]
