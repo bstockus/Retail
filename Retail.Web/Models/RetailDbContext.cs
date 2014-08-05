@@ -13,7 +13,7 @@ namespace Retail.Web.Models {
         }
 
         public RetailDbContext()
-            : this(@"Data Source=BRYANJSTOCKEDA3;Initial Catalog=RetailDB;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False;MultipleActiveResultSets=true") {
+            : this(@"Data Source=BSTOCKUS-PC;Initial Catalog=RetailDB;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False;MultipleActiveResultSets=true") {
 
         }
 
@@ -36,6 +36,8 @@ namespace Retail.Web.Models {
         public DbSet<Service> Services { get; set; }
 
         public DbSet<Vendor> Vendors { get; set; }
+
+        public DbSet<ContactList> ContactLists { get; set; }
 
     }
 }

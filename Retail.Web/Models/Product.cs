@@ -20,10 +20,10 @@ namespace Retail.Web.Models {
         [Required, Index, Display(Name = "Vendor"), InverseProperty("Products")]
         public virtual Vendor Vendor { get; set; }
 
-        [InverseProperty("Product")]
+        [Display(Name = "SaleItems"), InverseProperty("Product")]
         public virtual List<SaleItem> SaleItems { get; set; }
 
-        [InverseProperty("Product")]
+        [Display(Name = "Services"), InverseProperty("Product")]
         public virtual List<Service> Services { get; set; }
 
         [StringLength(1000), Display(Name = "Description"), DataType(DataType.MultilineText)]

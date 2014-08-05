@@ -63,11 +63,7 @@
     </div>
     <div class="tab-pane" id="sales">
         <div class="details-tab-div">
-            @*@{
-                var vdSales = new ViewDataDictionary();
-                vdSales.Add("IsEditable", false);
-                Html.RenderPartial("~/Views/Sales/_Table.cshtml", Model.SaleItems.Sale, vdSales);
-            }*@
+            @Html.Action("SalesForProduct", new { product = Model })
         </div>
     </div>
     <div class="tab-pane" id="services">

@@ -35,14 +35,17 @@ namespace Retail.Web.Models {
         [StringLength(100), Display(Name = "Email"), EmailAddress]
         public string Email { get; set; }
 
-        [InverseProperty("Customer")]
+        [Display(Name = "Incidents"), InverseProperty("Customer")]
         public virtual List<Incident> Incidents { get; set; }
 
-        [InverseProperty("Customer")]
+        [Display(Name = "Services"), InverseProperty("Customer")]
         public virtual List<Service> Services { get; set; }
 
-        [InverseProperty("Customer")]
+        [Display(Name = "Sales"), InverseProperty("Customer")]
         public virtual List<Sale> Sales { get; set; }
+
+        [Display(Name = "ContactLists"), InverseProperty("Customers")]
+        public virtual List<ContactList> ContactLists { get; set; }
 
     }
 }

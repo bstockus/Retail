@@ -95,6 +95,15 @@ namespace Retail.Web.Controllers {
             return RedirectToAction("Index");
         }
 
+        [ChildActionOnly]
+        public ActionResult SalesForProduct(Product product) {
+
+            var sales = product.SaleItems.Select(x => x.Sale).Distinct();
+
+
+            return PartialView("_SalesForProduct", sales);
+        }
+
         protected override void Dispose(bool disposing) {
             if (disposing) {
                 db.Dispose();

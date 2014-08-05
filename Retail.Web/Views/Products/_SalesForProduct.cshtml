@@ -1,0 +1,7 @@
+﻿@model IEnumerable<Retail.Web.Models.Sale>
+
+@{
+    var vdSales = new ViewDataDictionary();
+    vdSales.Add("IsEditable", false);
+    Html.RenderPartial("~/Views/Sales/_Table.cshtml", Model, vdSales);
+}
