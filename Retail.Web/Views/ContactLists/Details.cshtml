@@ -1,26 +1,24 @@
 ﻿@model Retail.Web.Models.ContactList
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Customer List " + Model.Id.ToString();
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>ContactList</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-    </dl>
+<div class="">
+    <p class="pull-right">
+        <a role="button" class="btn btn-success" href="@Url.Action("Edit", new { id = Model.Id })"><i class='fa fa-pencil fa-fw'></i> Edit</a>
+        <a role="button" class="btn btn-success" href="@Url.Action("EditList", new { id = Model.Id })"><i class='fa fa-pencil fa-fw'></i> Edit Contacts</a>
+        <a role="button" class="btn btn-danger" href="@Url.Action("Delete", new { id=Model.Id })"><i class='fa fa-trash-o fa-fw'></i> Delete</a>
+    </p>
+    <h2>
+        <a role="button" class="btn btn-default" href="@Url.Action("Index")"><i class='fa fa-chevron-left fa-fw'></i> Contact Lists</a>
+        @Model.Name
+        <small>DETAILS</small>
+    </h2>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+@{
+    var vdContacts = new ViewDataDictionary();
+    vdContacts.Add("IsEditable", false);
+    Html.RenderPartial("~/Views/Customers/_Table.cshtml", Model.Customers, vdContacts);
+}

@@ -74,6 +74,10 @@ namespace Retail.Web.Migrations {
                 new Vendor {
                     Id = 1,
                     Name = "Vendor 1"
+                },
+                new Vendor {
+                    Id = 2,
+                    Name = "Vendor 2"
                 }
             );
 
@@ -119,6 +123,10 @@ namespace Retail.Web.Migrations {
                 new Category {
                     Id = 1,
                     Name = "Category 1"
+                },
+                new Category {
+                    Id = 2,
+                    Name = "Category 2"
                 }
             );
 
@@ -167,6 +175,21 @@ namespace Retail.Web.Migrations {
                     Product = products.First()
                 }
             );
+
+            context.SaveChanges();
+
+            context.Services.AddOrUpdate(s => s.Id,
+                new Service {
+                    Id = 1,
+                    Date = DateTime.Now,
+                    Customer = customers.First(),
+                    Employee = employees.First(),
+                    Product = products.First(),
+                    IsOpen = false
+                }
+            );
+
+            context.SaveChanges();
 
         }
     }

@@ -1,0 +1,148 @@
+﻿@model Retail.Web.Models.Service
+
+@{
+    ViewBag.Title = "Survey for Service " + Model.Id.ToString();
+}
+
+<style type="text/css">
+    .checkbox-labels {
+        padding-top: 7px;
+    }
+</style>
+
+<div class="page-header">
+    <p class="pull-right">
+
+    </p>
+    <h2>
+        Service @Model.Date.ToString() for Customer @Model.Customer.FirstName @Model.Customer.LastName
+        <small>SURVEY</small>
+    </h2>
+</div>
+
+@using (Html.BeginForm()) {
+
+    <div class="form-horizontal">
+
+        <h5>Please rate this incident by the following categories:</h5>
+
+        @Html.Hidden("serviceId", Model.Id)
+
+        <div class="form-group row">
+            <div class="col-md-2">
+                <p class="text-right checkbox-labels">Response Time:</p>
+            </div>
+            <div class="col-md-10">
+                <label class="radio-inline">
+                    <input type="radio" name="responseTime" id="responseTime1" value="0"> Not Satisfied
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="responseTime" id="responseTime2" value="1"> Somewhat Satisfied
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="responseTime" id="responseTime3" value="2"> Satisfied
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="responseTime" id="responseTime4" value="3"> Completly Satisifed
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-2">
+                <p class="text-right checkbox-labels">Technician Efficiency:</p>
+            </div>
+            <div class="col-md-10">
+                <label class="radio-inline">
+                    <input type="radio" name="technicianEfficiency" id="technicianEfficiency1" value="0"> Not Satisfied
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="technicianEfficiency" id="technicianEfficiency2" value="1"> Somewhat Satisfied
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="technicianEfficiency" id="technicianEfficiency3" value="2"> Satisfied
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="technicianEfficiency" id="technicianEfficiency4" value="3"> Completly Satisifed
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-2">
+                <p class="text-right checkbox-labels">Problem Resolution:</p>
+            </div>
+            <div class="col-md-10">
+                <label class="radio-inline">
+                    <input type="radio" name="problemResolution" id="problemResolution1" value="0"> Not Satisfied
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="problemResolution" id="problemResolution2" value="1"> Somewhat Satisfied
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="problemResolution" id="problemResolution3" value="2"> Satisfied
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="problemResolution" id="problemResolution4" value="3"> Completly Satisifed
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-2">
+                <p class="text-right">Additional Comments:</p>
+            </div>
+            <div class="col-md-10">
+                <textarea name="additionalComments" id="additionalComments" rows="10" cols="70"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-10">
+                <label class="checkbox-inline">
+                    <input type="checkbox" value="yes" name="contactMe" id="contactMe" /> Please contact me to discuss this survey
+                </label>
+                <div class="row hidden" id="contactby-div">
+                    <div class="col-md-10 col-md-offset-1 radio">
+                        <label class="radio-inline">
+                            <input type="radio" name="contactBy" id="contactby-email" value="phone" checked> by email.
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="contactBy" id="contactby-phone" value="email"> by phone.
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <a role="button" class="btn btn-default" href="@Request.UrlReferrer.ToString()">Cancel</a>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    
+    <script type="text/javascript">
+        $(function () {
+            
+            $("#contactMe").change(function () {
+                if ($("#contactMe").is(":checked")) {
+                    $("#contactby-div").removeClass("hidden");
+                } else {
+                    $("#contactby-div").addClass("hidden");
+                }
+            })
+        });
+    </script>
+
+    
+}
+
+

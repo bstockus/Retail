@@ -7,8 +7,10 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Retail.Web.Models;
+using Retail.Web.Infrastructure;
 
 namespace Retail.Web.Controllers {
+    [NavBarNameAction("Products")]
     public class CategoriesController : Controller {
         private RetailDbContext db = new RetailDbContext();
 
@@ -69,28 +71,6 @@ namespace Retail.Web.Controllers {
                 return RedirectToAction("Index");
             }
             return View(category);
-        }
-
-        // GET: Categories/Delete/5
-        public ActionResult Delete(int? id) {
-            if (id == null) {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Category category = db.Categories.Find(id);
-            if (category == null) {
-                return HttpNotFound();
-            }
-            return View(category);
-        }
-
-        // POST: Categories/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id) {
-            Category category = db.Categories.Find(id);
-            db.Categories.Remove(category);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing) {

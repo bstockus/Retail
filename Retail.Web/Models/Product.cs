@@ -17,7 +17,7 @@ namespace Retail.Web.Models {
         [Required, Index, Display(Name = "Category"), InverseProperty("Products"), UIHint("Category")]
         public virtual Category Category { get; set; }
 
-        [Required, Index, Display(Name = "Vendor"), InverseProperty("Products")]
+        [Required, Index, Display(Name = "Vendor"), InverseProperty("Products"), UIHint("Vendor")]
         public virtual Vendor Vendor { get; set; }
 
         [Display(Name = "SaleItems"), InverseProperty("Product")]
@@ -26,7 +26,7 @@ namespace Retail.Web.Models {
         [Display(Name = "Services"), InverseProperty("Product")]
         public virtual List<Service> Services { get; set; }
 
-        [StringLength(1000), Display(Name = "Description"), DataType(DataType.MultilineText)]
+        [StringLength(1000), Display(Name = "Description"), UIHint("Description")]
         public string Description { get; set; }
 
         [Required, Display(Name = "Price"), Column(TypeName = "Money"), UIHint("Money")]

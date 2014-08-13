@@ -1,3 +1,93 @@
 ﻿@{
     ViewBag.Title = "Home Page";
+    AjaxOptions openServicesAjaxOptions = new AjaxOptions {
+        UpdateTargetId = "open-services-tbl"
+    };
+}
+
+<div class="page-header">
+    <h1>@ViewBag.CompanyName <small>HOME</small></h1>
+</div>
+
+<div class="row">
+    <h2>Common Actions:</h2>
+    <div class="col-md-2">
+        <h3>Customers</h3>
+        <ul>
+            <li>@Html.ActionLink("View Customers...", "Index", "Customers")</li>
+            <li>@Html.ActionLink("Add New Customer...", "Create", "Customers")</li>
+        </ul>
+    </div>
+    <div class="col-md-2">
+        <h3>Employees</h3>
+        <ul>
+            <li>@Html.ActionLink("View Employees...", "Index", "Employees")</li>
+            <li>@Html.ActionLink("Add New Employee...", "Create", "Employees")</li>
+        </ul>
+    </div>
+    <div class="col-md-2">
+        <h3>Products</h3>
+        <ul>
+            <li>@Html.ActionLink("View Products...", "Index", "Products")</li>
+            <li>@Html.ActionLink("Add New Product...", "Create", "Products")</li>
+            <li>@Html.ActionLink("View Vendors...", "Index", "Vendors")</li>
+            <li>@Html.ActionLink("Add New Vendor...", "Create", "Vendor")</li>
+            <li>@Html.ActionLink("View Categories...", "Index", "Categories")</li>
+            <li>@Html.ActionLink("Add New Category...", "Create", "Categories")</li>
+        </ul>
+    </div>
+    <div class="col-md-2">
+        <h3>Sales</h3>
+        <ul>
+            <li>@Html.ActionLink("View Sales...", "Index", "Sales")</li>
+            <li>@Html.ActionLink("Add New Sale...", "Create", "Sales")</li>
+        </ul>
+    </div>
+    <div class="col-md-2">
+        <h3>Services</h3>
+        <ul>
+            <li>@Html.ActionLink("View Services...", "Index", "Services")</li>
+            <li>@Html.ActionLink("Add New Service...", "Create", "Services")</li>
+        </ul>
+    </div>
+    <div class="col-md-2">
+        <h3>Incidents</h3>
+        <ul>
+            <li>@Html.ActionLink("View Incidents...", "Index", "Incidents")</li>
+            <li>@Html.ActionLink("Add New Incident...", "Create", "Incidents")</li>
+        </ul>
+    </div>
+</div>
+
+<div class="row">
+    <h2>Dashboard:</h2>
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">Open Services</div>
+            <div class="panel-body">
+                @using (Ajax.BeginForm("GetOpenServices", "Services", new RouteValueDictionary(), openServicesAjaxOptions, new { @class = "form-inline" })) {
+                    <label for="Employee">Employee: </label>
+                    @Html.DropDownList("Employee", (IEnumerable<SelectListItem>)ViewBag.EmployeesSelectListItems)
+                    <button type="submit" class="btn btn-default">Search</button>
+                }
+            </div>
+            <table class="table" id="open-services-tbl">
+                <tr>
+                    <td>
+                        <p class="text-center">Select an Employee.</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">Available Surveys</div>
+            @Html.Action("GetAvailableSurveys", "Services")
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryajax")
 }

@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Survey Results";
+}
+
+<div class="page-header">
+    <p class="pull-right">
+
+    </p>
+    <h2>
+        Survey Results
+    </h2>
+</div>
+
+<div>
+    <h3>Thank you for your feedback!</h3>
+    <p>@ViewBag.SurveyMessage</p>
+    <div>
+        <a role="button" href="@Url.Action("Index","Home")" class="btn btn-primary">Done</a>
+    </div>
+</div>

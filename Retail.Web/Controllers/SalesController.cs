@@ -32,6 +32,8 @@ namespace Retail.Web.Controllers {
         }
 
         // GET: Sales/Create
+        [CustomersDropDownAction]
+        [EmployeesDropDownAction]
         public ActionResult Create() {
             return View();
         }
@@ -39,17 +41,26 @@ namespace Retail.Web.Controllers {
         // POST: Sales/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Date,SubTotal,Discount,Tax,Total")] Sale sale) {
-            if (ModelState.IsValid) {
-                db.Sales.Add(sale);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+        public ActionResult Create(int Customer, int Employee) {
 
-            return View(sale);
+            Customer _customer = db.Customers.Where(c => c.Id == Customer).First();
+            Employee _employee = db.Employees.Where(e => e.Id == Employee).First();
+
+            Sale sale = new Sale();
+            sale.Customer = _customer;
+            sale.Employee = _employee;
+            sale.Date = DateTime.Now;
+            sale.SubTotal = 0.00M;
+            sale.Discount = 0.00M;
+            sale.Tax = 0.00M;
+            sale.Total = 0.00M;
+
+            db.Sales.Add(sale);
+            db.SaveChanges();
+
+            return RedirectToAction("Edit", new { id = sale.Id });
         }
 
-        // GET: Sales/Edit/5
         public ActionResult Edit(int? id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -59,40 +70,6 @@ namespace Retail.Web.Controllers {
                 return HttpNotFound();
             }
             return View(sale);
-        }
-
-        // POST: Sales/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Date,SubTotal,Discount,Tax,Total")] Sale sale) {
-            if (ModelState.IsValid) {
-                db.Entry(sale).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(sale);
-        }
-
-        // GET: Sales/Delete/5
-        public ActionResult Delete(int? id) {
-            if (id == null) {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Sale sale = db.Sales.Find(id);
-            if (sale == null) {
-                return HttpNotFound();
-            }
-            return View(sale);
-        }
-
-        // POST: Sales/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id) {
-            Sale sale = db.Sales.Find(id);
-            db.Sales.Remove(sale);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing) {

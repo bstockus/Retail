@@ -14,19 +14,19 @@ namespace Retail.Web.Models {
         [Required, Display(Name = "Date")]
         public DateTime Date { get; set; }
 
-        [Required, Display(Name = "Customer"), InverseProperty("Services")]
+        [Required, Display(Name = "Customer"), InverseProperty("Services"), UIHint("Customer")]
         public virtual Customer Customer { get; set; }
 
-        [Required, Display(Name = "Employee"), InverseProperty("Services")]
+        [Required, Display(Name = "Employee"), InverseProperty("Services"), UIHint("Employee")]
         public virtual Employee Employee { get; set; }
 
-        [Required, Display(Name = "Product"), InverseProperty("Services")]
+        [Required, Display(Name = "Product"), InverseProperty("Services"), UIHint("Product")]
         public virtual Product Product { get; set; }
 
-        [Required, Display(Name = "Open")]
+        [Required, Display(Name = "Status"), UIHint("OpenClosed")]
         public bool IsOpen { get; set; }
 
-        [StringLength(1000), Display(Name = "Description"), DataType(DataType.MultilineText)]
+        [StringLength(1000), Display(Name = "Description"), UIHint("Description")]
         public string Description { get; set; }
 
     }

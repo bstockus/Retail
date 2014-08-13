@@ -1,15 +1,9 @@
 ﻿@model IEnumerable<Retail.Web.Models.Sale>
 
-@{
-    if (ViewBag.IsEditable == null) {
-        ViewBag.IsEditable = true;
-    }
-}
-
 @if (Model.Count() == 0) {
     <p class="text-center">No Sales</p>
 } else {
-    <table class="table">
+    <table class="table table-special">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Date)
@@ -26,9 +20,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Total)
             </th>
-            @if (ViewBag.IsEditable) {
-                <th></th>
-            }
         </tr>
 
 
@@ -36,11 +27,7 @@
         @foreach (var item in Model) {
             <tr>
                 <td>
-                    @if (ViewBag.IsEditable) {
-                        @Html.DisplayFor(modelItem => item.Date)
-                    } else {
-                        @Html.DisplayFor(modelItem => item)
-                    }
+                    @Html.DisplayFor(modelItem => item)
                 </td>
 
                 <td>
@@ -55,13 +42,6 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Total)
                 </td>
-                @if (ViewBag.IsEditable) {
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                    </td>
-                }
             </tr>
         }
 

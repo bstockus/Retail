@@ -1,14 +1,25 @@
 ﻿@model Retail.Web.Models.Service
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Service " + Model.Id.ToString();
 }
-
-<h2>Details</h2>
-
+<form action="@Url.Action("Close")" method="post">
+    @Html.Hidden("id", Model.Id)
+    <div class="page-header">
+        <p class="pull-right">
+            <a role="button" class="btn btn-success" href="@Url.Action("Edit", new { id = Model.Id })"><i class='fa fa-pencil fa-fw'></i> Edit</a>
+            @if (Model.IsOpen) {
+                <input type="submit" class="btn btn-warning" value="Close" />
+            }
+        </p>
+        <h2>
+            <a role="button" class="btn btn-default" href="@Url.Action("Index")"><i class='fa fa-chevron-left fa-fw'></i> Services</a>
+            Service @Model.Date.ToShortDateString()
+            <small>DETAILS</small>
+        </h2>
+    </div>
+</form>
 <div>
-    <h4>Service</h4>
-    <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Date)
@@ -27,6 +38,30 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.Customer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Employee)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Employee)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Product)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.Description)
         </dt>
 
@@ -36,7 +71,3 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

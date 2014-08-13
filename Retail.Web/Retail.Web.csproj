@@ -15,7 +15,7 @@
     <AssemblyName>Retail.Web</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -29,6 +29,10 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PublishDatabaseSettings>
+      <Objects>
+      </Objects>
+    </PublishDatabaseSettings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -138,8 +142,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\HtmlExtensions.cs" />
+    <Compile Include="Infrastructure\CategoriesDropDownActionAttribute.cs" />
     <Compile Include="Infrastructure\CompanyNameActionAttribute.cs" />
+    <Compile Include="Infrastructure\CustomersDropDownActionAttribute.cs" />
+    <Compile Include="Infrastructure\EmployeesDropDownActionAttribute.cs" />
     <Compile Include="Infrastructure\NavBarNameActionAttribute.cs" />
+    <Compile Include="Infrastructure\ProductsDropDownActionAttribute.cs" />
+    <Compile Include="Infrastructure\VendorsDropDownActionAttribute.cs" />
     <Compile Include="Migrations\201407290120030_InitialCreate.cs" />
     <Compile Include="Migrations\201407290120030_InitialCreate.Designer.cs">
       <DependentUpon>201407290120030_InitialCreate.cs</DependentUpon>
@@ -175,8 +185,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-checkbox.css" />
+    <Content Include="Content\bootstrap-cyborg-theme.css" />
     <Content Include="Content\bootstrap-select.css" />
     <Content Include="Content\bootstrap-select.min.css" />
+    <Content Include="Content\bootstrap-slate-theme.css" />
+    <Content Include="Content\bootstrap-spacelab-theme.css" />
     <Content Include="Content\bootstrap-switch.css" />
     <Content Include="Content\bootstrap-switch.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -186,6 +199,8 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\star-rating.css" />
+    <Content Include="Content\star-rating.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -640,6 +655,8 @@
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -658,6 +675,8 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\star-rating.js" />
+    <Content Include="Scripts\star-rating.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -672,7 +691,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Categories\Create.cshtml" />
-    <Content Include="Views\Categories\Delete.cshtml" />
     <Content Include="Views\Categories\Details.cshtml" />
     <Content Include="Views\Categories\Edit.cshtml" />
     <Content Include="Views\Categories\Index.cshtml" />
@@ -681,7 +699,6 @@
     <Content Include="Views\Customers\Edit.cshtml" />
     <Content Include="Views\Customers\Index.cshtml" />
     <Content Include="Views\Employees\Create.cshtml" />
-    <Content Include="Views\Employees\Delete.cshtml" />
     <Content Include="Views\Employees\Details.cshtml" />
     <Content Include="Views\Employees\Edit.cshtml" />
     <Content Include="Views\Employees\Index.cshtml" />
@@ -691,9 +708,7 @@
     <Content Include="Views\Incidents\Edit.cshtml" />
     <Content Include="Views\Incidents\Index.cshtml" />
     <Content Include="Views\Sales\Create.cshtml" />
-    <Content Include="Views\Sales\Delete.cshtml" />
     <Content Include="Views\Sales\Details.cshtml" />
-    <Content Include="Views\Sales\Edit.cshtml" />
     <Content Include="Views\Sales\Index.cshtml" />
     <Content Include="Views\SaleItems\Create.cshtml" />
     <Content Include="Views\SaleItems\Delete.cshtml" />
@@ -701,22 +716,15 @@
     <Content Include="Views\SaleItems\Edit.cshtml" />
     <Content Include="Views\SaleItems\Index.cshtml" />
     <Content Include="Views\Services\Create.cshtml" />
-    <Content Include="Views\Services\Delete.cshtml" />
     <Content Include="Views\Services\Details.cshtml" />
     <Content Include="Views\Services\Edit.cshtml" />
     <Content Include="Views\Services\Index.cshtml" />
     <Content Include="Views\Vendors\Create.cshtml" />
-    <Content Include="Views\Vendors\Delete.cshtml" />
     <Content Include="Views\Vendors\Details.cshtml" />
     <Content Include="Views\Vendors\Edit.cshtml" />
     <Content Include="Views\Vendors\Index.cshtml" />
-    <Content Include="Views\Companies\Create.cshtml" />
-    <Content Include="Views\Companies\Delete.cshtml" />
-    <Content Include="Views\Companies\Details.cshtml" />
     <Content Include="Views\Companies\Edit.cshtml" />
-    <Content Include="Views\Companies\Index.cshtml" />
     <Content Include="Views\Products\Create.cshtml" />
-    <Content Include="Views\Products\Delete.cshtml" />
     <Content Include="Views\Products\Details.cshtml" />
     <Content Include="Views\Products\Edit.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
@@ -738,12 +746,31 @@
     <Content Include="Views\ContactLists\Details.cshtml" />
     <Content Include="Views\ContactLists\Edit.cshtml" />
     <Content Include="Views\ContactLists\Index.cshtml" />
+    <Content Include="Views\Shared\_NavBar.cshtml" />
+    <Content Include="Views\Products\_Table.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Category.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Vendor.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Vendor.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Product.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Customer.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Employee.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Description.cshtml" />
+    <Content Include="Views\Sales\Edit.cshtml" />
+    <Content Include="Views\ContactLists\_Table.cshtml" />
+    <Content Include="Views\ContactLists\_CustomersTable.cshtml" />
+    <Content Include="Views\ContactLists\EditList.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\ContactList.cshtml" />
+    <Content Include="Views\Services\Survey.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\OpenClosed.cshtml" />
+    <Content Include="Views\Services\SurveyResults.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Service.cshtml" />
+    <Content Include="Views\Services\GetOpenServices.cshtml" />
+    <Content Include="Views\Services\GetAvailableSurveys.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />
     <Folder Include="App_Data\" />
     <Folder Include="Migrations\FakeData\" />
-    <Folder Include="Views\Shared\EditorTemplates\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -780,7 +807,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>51320</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:51320/</IISUrl>
+          <IISUrl>http://localhost/Retail.Web</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

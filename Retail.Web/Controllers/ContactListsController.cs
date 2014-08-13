@@ -7,8 +7,10 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Retail.Web.Models;
+using Retail.Web.Infrastructure;
 
 namespace Retail.Web.Controllers {
+    [NavBarNameAction("Customers")]
     public class ContactListsController : Controller {
         private RetailDbContext db = new RetailDbContext();
 
@@ -75,6 +77,18 @@ namespace Retail.Web.Controllers {
             return View(contactList);
         }
 
+        // GET: ContactLists/EditList/5
+        public ActionResult EditList(int? id) {
+            if (id == null) {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ContactList contactList = db.ContactLists.Find(id);
+            if (contactList == null) {
+                return HttpNotFound();
+            }
+            return View(contactList);
+        }
+
         // GET: ContactLists/Delete/5
         public ActionResult Delete(int? id) {
             if (id == null) {
@@ -95,6 +109,56 @@ namespace Retail.Web.Controllers {
             db.ContactLists.Remove(contactList);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult EmptyContactList(int id) {
+            ContactList contactList = db.ContactLists.Find(id);
+            contactList.Customers.RemoveAll(x => true);
+            db.SaveChanges();
+            return RedirectToAction("EditList", new { id = id });
+        }
+
+        [ChildActionOnly]
+        public PartialViewResult ContactListIncludedCustomers(int id) {
+
+
+            ContactList contactList = db.ContactLists.Find(id);
+
+            var contacts = contactList.Customers;
+            ViewBag.ContactListId = id;
+            ViewBag.IsCustomersInListView = true;
+            return PartialView("_CustomersTable", contacts);
+        }
+
+        [ChildActionOnly]
+        public PartialViewResult ContactListNotIncludedCustomers(int id) {
+
+
+            ContactList contactList = db.ContactLists.Find(id);
+            var contacts = contactList.Customers;
+            var customers = db.Customers.AsEnumerable();
+            var notContacts = customers.Where(x => !(contacts.Contains(x)));
+            ViewBag.ContactListId = id;
+            ViewBag.IsCustomersInListView = false;
+            return PartialView("_CustomersTable", notContacts);
+        }
+
+        public ActionResult RemoveContactFromList(int listId, int contactId) {
+            ContactList contactList = db.ContactLists.Find(listId);
+            Customer contact = db.Customers.Find(contactId);
+            contactList.Customers.Remove(contact);
+            db.SaveChanges();
+
+            return RedirectToAction("EditList", new { id = listId });
+        }
+
+        public ActionResult AddContactToList(int listId, int contactId) {
+            ContactList contactList = db.ContactLists.Find(listId);
+            Customer contact = db.Customers.Find(contactId);
+            contactList.Customers.Add(contact);
+            db.SaveChanges();
+
+            return RedirectToAction("EditList", new { id = listId });
         }
 
         protected override void Dispose(bool disposing) {

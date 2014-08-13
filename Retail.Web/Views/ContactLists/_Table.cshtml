@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Retail.Web.Models.ContactList>
+
+@{
+    if (ViewBag.IsEditable == null) {
+        ViewBag.IsEditable = true;
+    }
+}
+
+@if (Model.Count() == 0) {
+    <p class="text-center">No Contact Lists</p>
+} else {
+    <table class="table table-special">
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Contacts
+            </th>
+        </tr>
+
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item)
+                </td>
+                <td>
+                    @item.Customers.Count().ToString()
+                </td>
+            </tr>
+        }
+
+    </table>
+}

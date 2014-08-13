@@ -4,12 +4,28 @@
     if (ViewBag.IsEditable == null) {
         ViewBag.IsEditable = true;
     }
+
+    if (ViewBag.IsSurveyable == null) {
+        ViewBag.IsSurveyable = false;
+    }
+
+    if (ViewBag.IncludeCustomer == null) {
+        ViewBag.IncludeCustomer = true;
+    }
+
+    if (ViewBag.IncludeEmployee == null) {
+        ViewBag.IncludeEmployee = true;
+    }
+
+    if (ViewBag.IncludeProduct == null) {
+        ViewBag.IncludeProduct = true;
+    }
 }
 
 @if (Model.Count() == 0) {
     <p class="text-center">No Services</p>
 } else {
-    <table class="table">
+    <table class="table table-special">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Date)
@@ -17,28 +33,62 @@
             <th>
                 @Html.DisplayNameFor(model => model.IsOpen)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th></th>
+            @if (ViewBag.IncludeCustomer) {
+                <th>
+                    @Html.DisplayNameFor(model => model.Customer)
+                </th>
+            }
+            @if (ViewBag.IncludeEmployee) {
+                <th>
+                    @Html.DisplayNameFor(model => model.Employee)
+                </th>
+            }
+            @if (ViewBag.IncludeProduct) {
+                <th>
+                    @Html.DisplayNameFor(model => model.Product)
+                </th>
+            }
+            @if (ViewBag.IsEditable || ViewBag.IsSurveyable) {
+                <th></th>
+            }
+
         </tr>
 
         @foreach (var item in Model) {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Date)
+                    @Html.DisplayFor(modelItem => item)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.IsOpen)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                </td>
+                @if (ViewBag.IncludeCustomer) {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Customer)
+                    </td>
+                }
+                @if (ViewBag.IncludeEmployee) {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Employee)
+                    </td>
+                }
+                @if (ViewBag.IncludeProduct) {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Product)
+                    </td>
+                }
+                @if (ViewBag.IsEditable || ViewBag.IsSurveyable) {
+                    <td class="text-right">
+                        @if (ViewBag.IsEditable) {
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                        }
+                        @if (ViewBag.IsSurveyable && !(item.IsOpen)) {
+                            @Html.ActionLink("Survey", "Survey", "Services", new { id = item.Id }, new { })
+                        }
+
+                    </td>
+                }
+
             </tr>
         }
 

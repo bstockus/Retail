@@ -1,0 +1,16 @@
+﻿@model Retail.Web.Models.Employee
+@using Retail.Web.Helpers
+
+@{
+    IEnumerable<SelectListItem> employeesSelectListItems = ViewBag.EmployeesSelectListItems;
+    if (Model != null) {
+        foreach (SelectListItem item in employeesSelectListItems) {
+            if (item.Value.AsInt() == Model.Id) {
+                item.Selected = true;
+            }
+        }
+    }
+
+}
+
+@Html.DropDownListFor(m => m, employeesSelectListItems)

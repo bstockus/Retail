@@ -1,10 +1,16 @@
 ﻿@model Retail.Web.Models.Service
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit Service " + Model.Id.ToString();
 }
 
-<h2>Edit</h2>
+<div class="page-header">
+    <h2>
+        <a role="button" class="btn btn-default" href="@Url.Action("Index")"><i class='fa fa-chevron-left fa-fw'></i> Products</a>
+        Service @Model.Date.ToShortDateString()
+        <small>EDIT</small>
+    </h2>
+</div>
 
 
 @using (Html.BeginForm())
@@ -12,28 +18,8 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Service</h4>
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.IsOpen, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.IsOpen)
-                    @Html.ValidationMessageFor(model => model.IsOpen, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -45,9 +31,11 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <a role="button" class="btn btn-default" href="@Request.UrlReferrer.ToString()">Cancel</a>
             </div>
         </div>
+
     </div>
 }
 

@@ -1,0 +1,86 @@
+﻿<ul class="nav navbar-nav">
+
+    @{
+        string[] items = new string[] { "Home", "Customers", "Employees", "Products", "Sales", "Services", "Incidents" };
+        string[][] itemMenus = new string[][] { null, new string[] { "Customers", "ContactLists" }, null, new string[] { "Products", "Vendors", "Categories" }, null, null, null };
+        var nameDictionary = new Dictionary<string, string>();
+        nameDictionary.Add("ContactLists", "Contact Lists");
+
+        var xs = items.Zip(itemMenus, (i, m) => new { Item = i, ItemMenu = m });
+    }
+
+
+    @foreach (var x in xs) {
+        string item = x.Item;
+        string[] itemMenu = x.ItemMenu;
+
+        string itemName;
+        try {
+            itemName = nameDictionary[item];
+        } catch (KeyNotFoundException e) {
+            itemName = item;
+        }
+
+        if (item == ViewBag.NavBarName) {
+            if (itemMenu == null) {
+                <li class="active">
+                    @Html.ActionLink(itemName, "Index", item)
+                </li>
+            } else {
+
+                <li class="dropdown active">
+                    <a href="@Url.Action(item, "Index")" class="dropdown-toggle" data-toggle="dropdown">@item <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        @foreach (string menuItem in itemMenu) {
+
+                            string menuItemName;
+                            try {
+                                menuItemName = nameDictionary[menuItem];
+                            } catch (KeyNotFoundException e) {
+                                menuItemName = menuItem;
+                            }
+
+                            <li>
+                                @Html.ActionLink(menuItemName, "Index", menuItem)
+                            </li>
+                        }
+                    </ul>
+
+                </li>
+            }
+        } else {
+            if (itemMenu == null) {
+                <li>
+                    @Html.ActionLink(itemName, "Index", item)
+                </li>
+            } else {
+                <li class="dropdown">
+                    <a href="@Url.Action(item, "Index")" class="dropdown-toggle" data-toggle="dropdown">@item <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        @foreach (string menuItem in itemMenu) {
+
+                            string menuItemName;
+                            try {
+                                menuItemName = nameDictionary[menuItem];
+                            } catch (KeyNotFoundException e) {
+                                menuItemName = menuItem;
+                            }
+
+                            <li>
+                                @Html.ActionLink(menuItemName, "Index", menuItem)
+                            </li>
+                        }
+                    </ul>
+                </li>
+            }
+        }
+    }
+</ul>
+<ul class="nav navbar-nav navbar-right">
+    <li class="pull-right dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-gear"></i><span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+            <li>@Html.ActionLink("Setting","Edit","Companies")</li>
+        </ul>
+    </li>
+</ul>

@@ -1,13 +1,10 @@
 ﻿@model Retail.Web.Models.Customer
 
 @{
-    ViewBag.Title = "Edit " + Model.Id.ToString();
+    ViewBag.Title = "Edit Customer " + Model.Id.ToString();
 }
 
-<div class="">
-    <p class="pull-right">
-        <a role="button" class="btn btn-success" href="@Url.Action("Create")"><i class="fa fa-plus"></i> Create New</a>
-    </p>
+<div class="page-header">
     <h2>
         <a role="button" class="btn btn-default" href="@Url.Action("Index")"><i class='fa fa-chevron-left fa-fw'></i> Customers</a>
         @Model.LastName, @Model.FirstName
@@ -16,13 +13,10 @@
 </div>
 
 
-@using (Html.BeginForm())
-{
+@using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>Customer</h4>
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
 
@@ -45,7 +39,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control narrow" } })
                 @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -69,7 +63,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.AddressZip, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.AddressZip, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.AddressZip, new { htmlAttributes = new { @class = "form-control narrow" } })
                 @Html.ValidationMessageFor(model => model.AddressZip, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -93,7 +87,7 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-primary" />
-                <a role="button" class="btn btn-default" href="@Url.Action("Index")">Cancel</a>
+                <a role="button" class="btn btn-default" href="@Request.UrlReferrer.ToString()">Cancel</a>
             </div>
         </div>
     </div>

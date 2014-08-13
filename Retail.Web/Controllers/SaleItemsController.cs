@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Retail.Web.Models;
+using Retail.Web.Infrastructure;
 
 namespace Retail.Web.Controllers {
     public class SaleItemsController : Controller {
@@ -91,6 +92,19 @@ namespace Retail.Web.Controllers {
             db.SaleItems.Remove(saleItem);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        // GET: SaleItems/AddSaleItemModal/5
+        [ProductsDropDownAction]
+        public PartialViewResult AddSaleItemModal(int id) {
+
+            Sale sale = db.Sales.Find(id);
+
+            SaleItem saleItem = new SaleItem();
+            saleItem.Sale = sale;
+
+            return PartialView("_AddSaleItemModal", saleItem);
+
         }
 
         protected override void Dispose(bool disposing) {

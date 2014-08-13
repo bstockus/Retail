@@ -13,7 +13,11 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+    max-width: 400px;
+}
+
+input.narrow {
+    max-width: 180px;
 }
 
 /* Sticky footer styles
@@ -50,14 +54,25 @@ body {
     }
 }
 
-th {
+.table-special th {
     border-top: 0 solid white !important;
 }
 
 .details-tab-div {
-    margin-top: 10px;
+    margin-top: 0;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    background-color: rgb(24,24,24);
 }
 
-table {
+.table-special {
     border-top: 0 solid white;
+}
+
+div.details-tab-div table tbody tr th {
+    padding-top: 0 !important;
+}
+
+.no-top-border {
+    border-top: 0 solid white !important;
 }

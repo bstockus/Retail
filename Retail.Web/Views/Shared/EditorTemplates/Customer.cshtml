@@ -1,0 +1,16 @@
+﻿@model Retail.Web.Models.Customer
+@using Retail.Web.Helpers
+
+@{
+    IEnumerable<SelectListItem> customersSelectListItems = ViewBag.CustomersSelectListItems;
+    if (Model != null) {
+        foreach (SelectListItem item in customersSelectListItems) {
+            if (item.Value.AsInt() == Model.Id) {
+                item.Selected = true;
+            }
+        }
+    }
+
+}
+
+@Html.DropDownListFor(m => m, customersSelectListItems)

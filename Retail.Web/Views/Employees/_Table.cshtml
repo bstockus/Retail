@@ -7,15 +7,12 @@
 }
 
 @if (Model.Count() == 0) {
-    <p class="text-center">No Incidents</p>
+    <p class="text-center">No Employees</p>
 } else {
-    <table class="table">
+    <table class="table table-special">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastName)
+                Name
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.PhoneNumber)
@@ -38,16 +35,15 @@
             <th>
                 @Html.DisplayNameFor(model => model.Job)
             </th>
-            <th></th>
+            @if (ViewBag.IsEditable) {
+                <th></th>
+            }
         </tr>
 
         @foreach (var item in Model) {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LastName)
+                    @Html.DisplayFor(modelItem => item)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.PhoneNumber)
@@ -70,11 +66,12 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Job)
                 </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                </td>
+                @if (ViewBag.IsEditable) {
+                    <td class="text-right">
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                    </td>
+                }
+
             </tr>
         }
 
