@@ -17,8 +17,22 @@
 
 <ul class="nav nav-tabs" role="tablist">
     <li class="active"><a href="#details" role="tab" data-toggle="tab">Details</a></li>
-    <li><a href="#sales" role="tab" data-toggle="tab">Sales</a></li>
-    <li><a href="#services" role="tab" data-toggle="tab">Services</a></li>
+    <li>
+        <a href="#sales" role="tab" data-toggle="tab">
+            Sales
+            @if (Model.SaleItems.Count() > 0) {
+                <span class="badge">@Model.SaleItems.Count.ToString()</span>
+            }
+        </a>
+    </li>
+    <li>
+        <a href="#services" role="tab" data-toggle="tab">
+            Services
+            @if (Model.Services.Count() > 0) {
+                <span class="badge">@Model.Services.Count.ToString()</span>
+            }
+        </a>
+    </li>
 </ul>
 
 <div class="tab-content">

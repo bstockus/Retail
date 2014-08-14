@@ -17,10 +17,38 @@
 
 <ul class="nav nav-tabs" role="tablist">
     <li class="active"><a href="#details" role="tab" data-toggle="tab">Details</a></li>
-    <li><a href="#sales" role="tab" data-toggle="tab">Sales</a></li>
-    <li><a href="#services" role="tab" data-toggle="tab">Services</a></li>
-    <li><a href="#incidents" role="tab" data-toggle="tab">Incidents</a></li>
-    <li><a href="#contactlists" role="tab" data-toggle="tab">Contact Lists</a></li>
+    <li>
+        <a href="#sales" role="tab" data-toggle="tab">
+            Sales
+            @if (Model.Sales.Count() > 0) {
+                <span class="badge">@Model.Sales.Count.ToString()</span>
+            }
+        </a>
+    </li>
+    <li>
+        <a href="#services" role="tab" data-toggle="tab">
+            Services
+            @if (Model.Services.Count() > 0) {
+                <span class="badge">@Model.Services.Count.ToString()</span>
+            }
+        </a>
+    </li>
+    <li>
+        <a href="#incidents" role="tab" data-toggle="tab">
+            Incidents
+            @if (Model.Incidents.Count() > 0) {
+                <span class="badge">@Model.Incidents.Count.ToString()</span>
+            }
+        </a>
+    </li>
+    <li>
+        <a href="#contactlists" role="tab" data-toggle="tab">
+            Contact Lists
+            @if (Model.ContactLists.Count() > 0) {
+                <span class="badge">@Model.ContactLists.Count.ToString()</span>
+            }
+        </a>
+    </li>
 </ul>
 
 <div class="tab-content">
